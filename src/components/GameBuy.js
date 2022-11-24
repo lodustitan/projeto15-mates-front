@@ -9,14 +9,14 @@ import Label from "./Label";
 
 /* Others */
 
-function GameBuy(){
+function GameBuy({title, price}){
     return (
         <Style>
             <span className="gameBuyC_buyGameTitle">
-                God of War
+                {title}
             </span>
             <div className="gameBuyC_floatBoxButtonPanel">
-                <Label color="#2c2c2c">R$ 149,00</Label>
+                <Label color="#2c2c2c">R$ {price.toFixed(2)}</Label>
                 <Button color="green">Comprar</Button>
             </div>
         </Style>

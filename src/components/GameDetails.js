@@ -7,11 +7,11 @@ import styled from "styled-components";
 
 /* Others */
 
-function GameDetails({children, dev, dist, img}){
+function GameDetails({children, dev, dist, img, genre}){
     return (
         <Style>
             <ImgContainer>
-                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1593500/header.jpg?t=1650554420" alt="IMG" />
+                <img src={img} alt="IMG" />
             </ImgContainer>
             <div className="gameDetailsC_description">
                 {children}
@@ -22,12 +22,12 @@ function GameDetails({children, dev, dist, img}){
                     <span>Distribuidora:</span>
                 </div>
                 <div className="gameDetailsC_SpecsInfo">
-                    <span>Santa Monica Studio</span>
-                    <span>Playstation</span>
+                    <span>{dev}</span>
+                    <span>{dist}</span>
                 </div>
             </Specs>
             <div className="gameDetailsC_tags">
-                <Tags>Tiro</Tags>
+                <Tags>{genre}</Tags>
             </div>
         </Style>
     );

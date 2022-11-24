@@ -1,26 +1,45 @@
 /* Tools */
+import axios from "axios";
 import styled from "styled-components";
 
 /* Hooks */
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 /* Components */
 import GameDetails from "../components/GameDetails";
 import GameBuy from "../components/GameBuy";
+import Loading from "../components/Loading";
 
 /* Others */
 
 
 function Game(){
+
+    const params = useParams();
+    const [gameInfos, setGameInfos] = useState();
+
+    useEffect(()=>{
+        axios.get(`http://localhost:5000/game/${params.id}`)
+            .then(res => {
+                setGameInfos(res.data);
+            })
+            .catch(err => {
+                console.error(err);
+            })
+    }, [])
+
     return(
         <Style>
-            <span>God of War</span>
-            <GameDetails dev="Santa Monica Studio" dist="Playstation" img="">
-                Com a vingança contra os deuses do Olimpo em um passado distante, 
-                Kratos agora vive como um mortal no reino dos deuses e monstros nórdicos. 
-                É nesse mundo duro e implacável que ele deve lutar para sobreviver... 
-                e ensinar seu filho a fazer o mesmo.
-            </GameDetails>
-            <GameBuy />
+            {gameInfos?
+                <>
+                    <span>{gameInfos.name}</span>
+                    <GameDetails dev={gameInfos.developer} dist={gameInfos.dist} genre={gameInfos.genre} img={gameInfos.banner}>
+                        {gameInfos.description}
+                    </GameDetails>
+                    <GameBuy title={gameInfos.name} price={gameInfos.price} />
+                </>: <Loading />
+            }
         </Style>
     );
 }
@@ -30,7 +49,7 @@ const Style = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: #222;
     
     & > span { 
