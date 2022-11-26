@@ -2,6 +2,7 @@
 import styled from "styled-components";
 
 /* Hooks */
+import { useLocation } from "react-router-dom";
 
 /* Components */
 import CheckoutBox from "../components/CheckoutBox";
@@ -9,10 +10,14 @@ import CheckoutBox from "../components/CheckoutBox";
 /* Others */
 
 function Checkout(){
+
+    const { state } = useLocation();
+    console.log(state)
+
     return (
         <Style>
             <span>Dados de confirmação</span>
-            <CheckoutBox />
+            <CheckoutBox param={state}/>
         </Style>
     );
 }
@@ -22,7 +27,7 @@ const Style = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: #222;
     
     & > span { 

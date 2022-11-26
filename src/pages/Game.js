@@ -3,8 +3,8 @@ import axios from "axios";
 import styled from "styled-components";
 
 /* Hooks */
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 
 /* Components */
 import GameDetails from "../components/GameDetails";
@@ -12,15 +12,22 @@ import GameBuy from "../components/GameBuy";
 import Loading from "../components/Loading";
 
 /* Others */
-
+import { global } from "../App";
 
 function Game(){
 
+    const globalVars = useContext(global);
     const params = useParams();
+    const navigate = useNavigate();
     const [gameInfos, setGameInfos] = useState();
 
+    function buyGame(){
+        axios.post("http://localhost:5000/cart", {user_id: globalVars.userId, game_id: Number(params.id)})
+            .then(res => navigate("/cart"));
+    }
+
     useEffect(()=>{
-        axios.get(`http://localhost:5000/game/${params.id}`)
+        axios.get(`http://localhost:5000/game/${params.id}`, {headers: {user_id: globalVars.userId}})
             .then(res => {
                 setGameInfos(res.data);
             })
@@ -37,7 +44,10 @@ function Game(){
                     <GameDetails dev={gameInfos.developer} dist={gameInfos.dist} genre={gameInfos.genre} img={gameInfos.banner}>
                         {gameInfos.description}
                     </GameDetails>
-                    <GameBuy title={gameInfos.name} price={gameInfos.price} />
+                    {gameInfos.iHave? 
+                    <GameBuy title={gameInfos.name} price={gameInfos.price} iHave={true} />
+                    :<GameBuy onClick={buyGame} title={gameInfos.name} price={gameInfos.price} />
+                    }
                 </>: <Loading />
             }
         </Style>
@@ -55,6 +65,7 @@ const Style = styled.div`
     & > span { 
         color: white;
         font-size: 2rem;
+        margin: 1.5rem 0;
     }
 `;
 

@@ -47,6 +47,8 @@ const Style = styled.div`
     
     .gameDetailsC_description {
         height: 140px;
+        font-size: .8rem;
+        padding: .5rem 0;
     }
     .gameDetailsC_tags {
         display: flex;
@@ -62,12 +64,14 @@ const Tags = styled.div`
 const Specs = styled.div`
     display: flex;
     width: 100%;
+    padding: .5rem 0;
     div {
         display: flex;
         flex-direction: column;
     }
     .gameDetailsC_SpecsInfo {
         margin-left: 1rem;
+        color: #83D2FF;
     }
 `;
 const ImgContainer = styled.div`

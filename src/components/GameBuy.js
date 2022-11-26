@@ -9,7 +9,7 @@ import Label from "./Label";
 
 /* Others */
 
-function GameBuy({title, price}){
+function GameBuy({title, price, onClick, iHave}){
     return (
         <Style>
             <span className="gameBuyC_buyGameTitle">
@@ -17,7 +17,7 @@ function GameBuy({title, price}){
             </span>
             <div className="gameBuyC_floatBoxButtonPanel">
                 <Label color="#2c2c2c">R$ {price.toFixed(2)}</Label>
-                <Button color="green">Comprar</Button>
+                <Button color="green" onClick={onClick}>{iHave? "Já Adquirido": "Comprar"}</Button>
             </div>
         </Style>
     );

@@ -2,6 +2,7 @@
 import styled from "styled-components";
 
 /* Hooks */
+import { useState } from "react";
 
 /* Components */
 import CartList from "../components/CartList";
@@ -22,7 +23,7 @@ const Style = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: #222;
     
     & > span { 

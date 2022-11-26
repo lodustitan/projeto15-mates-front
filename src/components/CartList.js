@@ -1,7 +1,10 @@
 /* Tools */
+import axios from "axios";
 import styled from "styled-components";
 
 /* Hooks */
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 
 /* Components */
 import CartItem from "./CartItem";
@@ -9,23 +12,36 @@ import Button from "./Button";
 import Label from "./Label";
 
 /* Others */
+import { global } from "../App";
 
 function CartList(){
+
+    const globalVars = useContext(global);
+    const navigate = useNavigate();
+    const params = useParams();
+    const [cartItems, setCartItems] = useState();
+
+    function checkout(){
+        axios.post("http://localhost:5000/checkout", {user_id: globalVars.userId})
+            .then(res => navigate("/checkout", {state: cartItems}))
+        
+    }
+
+    useEffect(()=>{
+        axios.get("http://localhost:5000/cart", {headers: {user_id: globalVars.userId}})
+            .then(res => {
+                setCartItems(res.data);
+            });
+    }, [])
+
     return (
         <Style>
             <div className="cartListC_list">
-                <CartItem title="God of War 5" price={149.00} />
-                <CartItem title="Fifa 27" price={149.00} />
-                <CartItem title="Call of Duty: Modern Warfare V" price={149.00} />
-                <CartItem title="Apex Legends Premium" price={149.00} />
-                <CartItem title="Overwatch 4" price={149.00} />
-                <CartItem title="Grand Theft Auto 7" price={149.00} />
-                <CartItem title="Grand Theft Auto 6" price={149.00} />
-                <CartItem title="Grand Theft Auto 5" price={149.00} />
+                {cartItems && cartItems.map(item => <CartItem title={item.name} price={item.price} />)}
             </div>
             <div className="cartListC_totalCost">
-                <Button color="#1EC82F">Finalizar compra</Button>
-                <Label color="#4C4C4C">Total: <span className="cartListC_spanGreen">R$ {(149.00 * 8).toFixed(2)}</span></Label>
+                <Button color="#1EC82F" onClick={checkout}>Finalizar compra</Button>
+                <Label color="#4C4C4C">Total: <span className="cartListC_spanGreen">R$ {cartItems && cartItems.reduce((p, c) => p+c.price, 0).toFixed(2)}</span></Label>
             </div>
         </Style>
     );

@@ -9,7 +9,7 @@ import CartItem from "./CartItem";
 
 /* Others */
 
-function CheckoutBox(){
+function CheckoutBox({param}){
     return (
         <Style>
             <Infos>
@@ -24,19 +24,12 @@ function CheckoutBox(){
                         <span>Rodolfo Barbosa</span>
                         <span>rodbarbero@gmail.com</span>
                         <span>96864864</span>
-                        <span>R$ 1.230,12</span>
+                        <span>R$ {param? (param.reduce((p,c) => p+c.price, 0)).toFixed(2): 0}</span>
                     </div>
                 </div>
 
                 <div className="checkoutBoxC_list">
-                    <CartItem title="Seilakk" price={23} />
-                    <CartItem title="Seilakk" price={23} />
-                    <CartItem title="Seilakk" price={23} />
-                    <CartItem title="Seilakk" price={23} />
-                    <CartItem title="Seilakk" price={23} />
-                    <CartItem title="Seilakk" price={23} />
-                    <CartItem title="Seilakk" price={23} />
-                    <CartItem title="Seilakk" price={23} />
+                    {param && param.map(item => <CartItem title={item.name} price={item.price} />)}
                 </div>
             </Infos>
             <div className="checkoutBoxC_backToHome">
