@@ -19,8 +19,6 @@ function CheckoutBox({param}){
                 <div className="checkoutBoxC_infos">
                     <div className="checkoutBoxC_infosField">
                         <span>Nome</span>
-                        <span>E-mail</span>
-                        <span>Nº Telefone</span>
                         <span>Valor Total</span>
                     </div>
                     <div className="checkoutBoxC_infosValues">

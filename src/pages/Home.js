@@ -102,7 +102,7 @@ export default function Home() {
     <Conteiner>
       <Destaque>
         <Spotlight>
-          <img src={kratos} onClick={() => goToGame(4)}></img>
+          <img src={kratos} onClick={() => goToGame(2)}></img>
           <h1>Destaque: God of War: Ragnarök</h1>
         </Spotlight>
       </Destaque>
@@ -289,8 +289,8 @@ const Games = styled.div`
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
-
     color: #abd7ff;
+
   }
 `;
 
