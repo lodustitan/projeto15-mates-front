@@ -35,26 +35,30 @@ const Panel = styled.div`
     display: flex;
     justify-content: space-between;
     color: white;
+    span{
+        cursor: pointer;
+    }
 `;
 const Navbar = styled.div`
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-  background-color: #3c3c3c;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: #3c3c3c;
 
-  height: 54px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    h1 {
+        cursor: pointer;
+        font-family: "Raleway";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 42px;
 
-  h1 {
-    font-family: "Raleway";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 36px;
-    line-height: 42px;
-
-    color: #ffffff;
-  }
+        color: #ffffff;
+    }
 `;

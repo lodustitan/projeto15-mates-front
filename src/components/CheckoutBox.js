@@ -21,9 +21,7 @@ function CheckoutBox({param}){
                         <span>Valor Total</span>
                     </div>
                     <div className="checkoutBoxC_infosValues">
-                        <span>Rodolfo Barbosa</span>
-                        <span>rodbarbero@gmail.com</span>
-                        <span>96864864</span>
+                        <span>{sessionStorage.uname}</span>
                         <span>R$ {param? (param.reduce((p,c) => p+c.price, 0)).toFixed(2): 0}</span>
                     </div>
                 </div>

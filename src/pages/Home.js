@@ -15,7 +15,7 @@ export default function Home() {
   const [corrida,setCorrida]=useState(false)
   const [rpg,setRpg]=useState(false)
 
-  const [games, setGames] =useState([])
+  const [games, setGames] = useState([])
   
   const [destaquesC,setDestaquesC]=useState([])
   const [destaquesC2,setDestaquesC2]=useState([])
@@ -63,7 +63,6 @@ export default function Home() {
   function goToGame(game_id){
 	navigate(`/game/${game_id}`);
   }
-
   useEffect(()=>{
     const url = "https://mates-back.onrender.com/games";
 
@@ -71,31 +70,31 @@ export default function Home() {
 		navigate("/");
 	}
 
-    const promisse = axios.get(url)
-    promisse.then((res)=>{
-       console.log("bresque", res.data)
-        setGames(res.data)
-		const gamesImported = res.data;
+		const promisse = axios.get(url)
+		promisse.then((res)=>{
+			setGames(res.data)
+			const gamesImported = res.data;
 
-		const aventuradb = gamesImported.filter(({genre})=> genre ==="aventura")
-		setAventuraC(aventuradb)
-		const corridadb = gamesImported.filter(({genre})=> genre ==="corrida")
-		setCorridaC(corridadb)
-		const rpgdb = gamesImported.filter(({genre})=> genre ==="RPG")
-		setRpgC(rpgdb)
-		const esportedb = gamesImported.filter(({genre}) => genre ==="esportes")
-		setEsporteC(esportedb)
-		const destaquedb = gamesImported.filter(({id}) => id === 1)
-		setDestaquesC(destaquedb)
-		const destaquedb2 = gamesImported.filter(({id}) => id === 4)
-		setDestaquesC2(destaquedb2)
-		const destaquedb3 = gamesImported.filter(({id}) => id === 12)
-		setDestaquesC3(destaquedb3)
+			const aventuradb = gamesImported.filter(({genre})=> genre ==="aventura")
+			setAventuraC(aventuradb)
+			const corridadb = gamesImported.filter(({genre})=> genre ==="corrida")
+			setCorridaC(corridadb)
+			const rpgdb = gamesImported.filter(({genre})=> genre ==="RPG")
+			setRpgC(rpgdb)
+			const esportedb = gamesImported.filter(({genre}) => genre ==="esportes")
+			setEsporteC(esportedb)
+			const destaquedb = gamesImported.filter(({id}) => id === 1)
+			setDestaquesC(destaquedb)
+			const destaquedb2 = gamesImported.filter(({id}) => id === 4)
+			setDestaquesC2(destaquedb2)
+			const destaquedb3 = gamesImported.filter(({id}) => id === 12)
+			setDestaquesC3(destaquedb3)
 
-    })
-    promisse.catch((erro)=>{
-        console.log(erro.response.data)
-    })
+			setDestaques(true);
+		})
+		promisse.catch((erro)=>{
+			console.log(erro.response.data)
+		})
   },[])
   
 
@@ -103,7 +102,7 @@ export default function Home() {
     <Conteiner>
       <Destaque>
         <Spotlight>
-          <img src={kratos}></img>
+          <img src={kratos} onClick={() => goToGame(4)}></img>
           <h1>Destaque: God of War: Ragnarök</h1>
         </Spotlight>
       </Destaque>
