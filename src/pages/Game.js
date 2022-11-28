@@ -12,22 +12,20 @@ import GameBuy from "../components/GameBuy";
 import Loading from "../components/Loading";
 
 /* Others */
-import { global } from "../App";
 
 function Game(){
 
-    const globalVars = useContext(global);
     const params = useParams();
     const navigate = useNavigate();
     const [gameInfos, setGameInfos] = useState();
 
     function buyGame(){
-        axios.post("http://localhost:5000/cart", {user_id: globalVars.userId, game_id: Number(params.id)})
-            .then(res => navigate("/cart"));
+        axios.post("http://localhost:5000/cart", {user_id: sessionStorage.uid, game_id: Number(params.id)})
+        .then(res => navigate("/cart"));
     }
-
+    
     useEffect(()=>{
-        axios.get(`http://localhost:5000/game/${params.id}`, {headers: {user_id: globalVars.userId}})
+        axios.get(`http://localhost:5000/game/${params.id}`, {headers: {user_id: sessionStorage.uid}})
             .then(res => {
                 setGameInfos(res.data);
             })

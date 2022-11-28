@@ -7,39 +7,32 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 
 /* Components */
-import CartItem from "./CartItem";
-import Button from "./Button";
-import Label from "./Label";
+import BibliotecaItem from "./BibliotecaItem";
 
 /* Others */
 
-function CartList(){
+function BibliotecaList(){
 
     const navigate = useNavigate();
-    const params = useParams();
-    const [cartItems, setCartItems] = useState();
+    const [myGamesItems, setMyGamesItems] = useState();
 
     function checkout(){
         axios.post("http://localhost:5000/checkout", {user_id: sessionStorage.uid})
-            .then(res => navigate("/checkout", {state: cartItems}))
+            .then(res => navigate("/checkout", {state: myGamesItems}))
         
     }
 
     useEffect(()=>{
-        axios.get("http://localhost:5000/cart", {headers: {user_id: sessionStorage.uid}})
+        axios.get("http://localhost:5000/mygames", {headers: {user_id: sessionStorage.uid}})
             .then(res => {
-                setCartItems(res.data);
+                setMyGamesItems(res.data);
             });
     }, [])
 
     return (
         <Style>
             <div className="cartListC_list">
-                {cartItems && cartItems.map(item => <CartItem title={item.name} price={item.price} />)}
-            </div>
-            <div className="cartListC_totalCost">
-                <Button color="#1EC82F" onClick={checkout}>Finalizar compra</Button>
-                <Label color="#4C4C4C">Total: <span className="cartListC_spanGreen">R$ {cartItems && cartItems.reduce((p, c) => p+c.price, 0).toFixed(2)}</span></Label>
+                {myGamesItems && myGamesItems.map(item => <BibliotecaItem title={item.name} img={item.poster} />)}
             </div>
         </Style>
     );
@@ -69,4 +62,4 @@ const Style = styled.div`
     }
 `;
 
-export default CartList;
+export default BibliotecaList;

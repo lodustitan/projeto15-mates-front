@@ -1,28 +1,34 @@
 /* Hooks */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { createContext, useState } from 'react';
 
 /* Pages */
 import Game from './pages/Game';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import MyGames from "./pages/MyGames";
 
-export const global = createContext()
+/* Components */
+import NavBar from "./components/layout/NavBar";
+
 
 function App() {
 
-	const [userId] = useState("63800b7cafb3e343893a1328");
-
 	return (
-		<global.Provider value={ {userId} }>
-			<BrowserRouter>
-				<Routes>
-					<Route path='/game/:id' element={<Game />} />
-					<Route path='/cart' element={< Cart />} />
-					<Route path='/checkout' element={<Checkout />} />
-				</Routes>
-			</BrowserRouter>
-		</global.Provider>
+		<BrowserRouter>
+			<NavBar />
+			<Routes>
+				<Route path='/' element={<Login />} />
+				<Route path='/register' element={<Register />} />
+				<Route path='/home' element={<Home />} />
+				<Route path='/game/:id' element={<Game />} />
+				<Route path='/cart' element={<Cart />} />
+				<Route path='/mygames' element={<MyGames />} />
+				<Route path='/checkout' element={<Checkout />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
