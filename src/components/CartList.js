@@ -20,13 +20,13 @@ function CartList(){
     const [cartItems, setCartItems] = useState();
 
     function checkout(){
-        axios.post("http://localhost:5000/checkout", {user_id: sessionStorage.uid})
+        axios.post("https://mates-back.onrender.com/checkout", {user_id: sessionStorage.uid})
             .then(res => navigate("/checkout", {state: cartItems}))
         
     }
 
     useEffect(()=>{
-        axios.get("http://localhost:5000/cart", {headers: {user_id: sessionStorage.uid}})
+        axios.get("https://mates-back.onrender.com/cart", {headers: {user_id: sessionStorage.uid}})
             .then(res => {
                 setCartItems(res.data);
             });

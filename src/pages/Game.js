@@ -20,12 +20,12 @@ function Game(){
     const [gameInfos, setGameInfos] = useState();
 
     function buyGame(){
-        axios.post("http://localhost:5000/cart", {user_id: sessionStorage.uid, game_id: Number(params.id)})
+        axios.post("https://mates-back.onrender.com/cart", {user_id: sessionStorage.uid, game_id: Number(params.id)})
         .then(res => navigate("/cart"));
     }
     
     useEffect(()=>{
-        axios.get(`http://localhost:5000/game/${params.id}`, {headers: {user_id: sessionStorage.uid}})
+        axios.get(`https://mates-back.onrender.com/game/${params.id}`, {headers: {user_id: sessionStorage.uid}})
             .then(res => {
                 setGameInfos(res.data);
             })

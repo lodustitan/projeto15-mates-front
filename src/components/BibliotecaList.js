@@ -17,13 +17,13 @@ function BibliotecaList(){
     const [myGamesItems, setMyGamesItems] = useState();
 
     function checkout(){
-        axios.post("http://localhost:5000/checkout", {user_id: sessionStorage.uid})
+        axios.post("https://mates-back.onrender.com/checkout", {user_id: sessionStorage.uid})
             .then(res => navigate("/checkout", {state: myGamesItems}))
         
     }
 
     useEffect(()=>{
-        axios.get("http://localhost:5000/mygames", {headers: {user_id: sessionStorage.uid}})
+        axios.get("https://mates-back.onrender.com/mygames", {headers: {user_id: sessionStorage.uid}})
             .then(res => {
                 setMyGamesItems(res.data);
             });

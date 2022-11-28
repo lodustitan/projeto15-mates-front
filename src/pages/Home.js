@@ -65,7 +65,7 @@ export default function Home() {
   }
 
   useEffect(()=>{
-    const url = "http://localhost:5000/games";
+    const url = "https://mates-back.onrender.com/games";
 
 	if(sessionStorage.uid === undefined){
 		navigate("/");

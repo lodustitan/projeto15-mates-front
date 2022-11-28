@@ -18,7 +18,7 @@ export default function Register() {
       cell: cell, 
       password: password 
     };
-    const promisse = axios.post("http://localhost:5000/signup", info);
+    const promisse = axios.post("https://mates-back.onrender.com/signup", info);
     promisse.then((res) => {
       Navigate("/");
     });

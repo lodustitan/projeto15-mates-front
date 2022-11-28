@@ -15,7 +15,7 @@ export default function Login() {
   function sendLogin(event) {
     event.preventDefault();
     const info = { email: email, password: password };
-    const promisse = axios.post("http://localhost:5000/signin", info);
+    const promisse = axios.post("https://mates-back.onrender.com/signin", info);
     promisse.then((res) => {
 		sessionStorage.setItem("uid", res.data.token);
 		sessionStorage.setItem("uname", res.data.user);
