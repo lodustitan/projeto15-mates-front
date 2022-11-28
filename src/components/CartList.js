@@ -20,8 +20,12 @@ function CartList(){
     const [cartItems, setCartItems] = useState();
 
     function checkout(){
-        axios.post("https://mates-back.onrender.com/checkout", {user_id: sessionStorage.uid})
-            .then(res => navigate("/checkout", {state: cartItems}))
+        if(cartItems){
+            if(cartItems.length !== 0){
+                axios.post("https://mates-back.onrender.com/checkout", {user_id: sessionStorage.uid})
+                    .then(res => navigate("/checkout", {state: cartItems}))
+            }
+        }
         
     }
 

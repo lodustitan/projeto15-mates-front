@@ -2,6 +2,7 @@
 import styled from "styled-components";
 
 /* Hooks */
+import { useNavigate } from "react-router-dom";
 
 /* Components */
 import Button from "./Button";
@@ -10,6 +11,8 @@ import CartItem from "./CartItem";
 /* Others */
 
 function CheckoutBox({param}){
+    const navigate = useNavigate();
+
     return (
         <Style>
             <Infos>
@@ -31,7 +34,7 @@ function CheckoutBox({param}){
                 </div>
             </Infos>
             <div className="checkoutBoxC_backToHome">
-                <Button color="#4c4c4c">Voltar para Home</Button>
+                <Button onClick={() => navigate("/home")} color="#4c4c4c">Voltar para Home</Button>
             </div>
         </Style>
     );
